@@ -1,0 +1,50 @@
+
+# This is the user-interface definition of a Shiny web application.
+# You can find out more about building applications with Shiny here:
+#
+# http://shiny.rstudio.com
+#
+
+library(shiny)
+library(leaflet)
+library(ggplot2)
+library(plotly)
+
+shinyUI(fluidPage(
+
+    # Application title
+    titlePanel("Schools Data 2016"),
+    
+    fluidRow(
+      column(width = 12,
+          radioButtons("Data",
+                       label = "Select Data by:",
+                       choice = c("All Data", "Local Authority", "Sponsor Type", "Gender", "Denomination"),
+                       selected = "All Data",
+                       inline = TRUE)
+             )
+    ),
+    
+    fluidRow(
+      column(width = 5,
+             uiOutput("Selected"))
+    ),
+    
+    fluidRow(
+      #column(width = 2,
+             #submitButton("Update")),
+      column(width = 12,
+             verbatimTextOutput("values")
+      )),
+    
+    fluidRow(
+      column(width = 12,
+             tableOutput("table"))
+    ),
+    
+    fluidRow(
+      plotlyOutput("plot", width = 800, height = 500)
+    )
+
+  
+))
